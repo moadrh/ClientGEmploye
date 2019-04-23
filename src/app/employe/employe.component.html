@@ -1,0 +1,117 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Service</h5>
+          
+        </div>
+        <div class="card-body all-icons">
+            <div class="card-body">
+                  <form [formGroup]="employeForm">
+                    <div class="form-group row">
+                      <label  class="col-sm-2 col-form-label">Nom</label>
+                      <div class="col-sm-8">
+                        <input  class="form-control" formControlName="nom" [(ngModel)]="selectedEmploye.nom"  placeholder="Nom">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label  class="col-sm-2 col-form-label">Prenom</label>
+                      <div class="col-sm-8">
+                        <input  class="form-control" formControlName="prenom" [(ngModel)]="selectedEmploye.prenom"  placeholder="Prenom">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label  class="col-sm-2 col-form-label">DateNaissance</label>
+                      <div class="col-sm-8">
+                        <input type="date" class="form-control" formControlName="dateNaissance" [(ngModel)]="selectedEmploye.dateNaissance"  >
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label  class="col-sm-2 col-form-label">Sexe</label>
+                      <div class="col-sm-8">
+                        <input  class="form-control" formControlName="sexe" [(ngModel)]="selectedEmploye.sexe"  placeholder="Sexe">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label  class="col-sm-2 col-form-label">Service</label>
+                      <div class="col-sm-8">
+                        <select  class="form-control" formControlName="service" [(ngModel)]="selectedEmploye.service" >
+
+                          <option *ngFor="let service of services">{{service.nom}}</option>
+                          
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <button class="btn btn-primary" (click)="operation == 'add' ? addEmploye() : updateEmploye()">
+                            {{operation == 'add' ? 'Ajouter' :
+                            operation == 'edit' ? 'Modifier' : ''}}
+                        </button>
+                    </div>
+                    </form>
+            </div>
+        </div>
+        
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"> Liste des employes</h4>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead class=" text-primary">
+                    <th>
+                      ID
+                    </th>
+                    <th>
+                      NOM
+                    </th>
+                    <th>
+                      PRENOM
+                    </th>
+                    <th>
+                      DATENAISSANCE
+                    </th>
+                    <th>
+                      SEXE
+                    </th>
+                    <th>
+                      SERVICE
+                    </th>
+                    <th>
+                      MODIFIER
+                    </th>
+                    <th>
+                      SUPPRIMER
+                    </th>
+                  </thead>
+                  <tbody >
+                    <tr *ngFor="let employe of employes">
+                      <td>{{employe.id}}</td>
+                      <td>{{employe.nom}}</td>
+                      <td>{{employe.prenom}}</td>
+                      <td>{{employe.datenaissance}}</td>
+                      <td>{{employe.sexe}}</td>
+                      <td>{{employe.service}}</td>
+                      <td><button class="btn btn-outline-warning"  (click)="selectedEmploye=employe ;operation='edit';">Modifier</button></td>
+                      <td><button class="btn btn-outline-danger" (click)="selectedEmploye=employe ; deleteEmploye()" >Supprimer</button></td>
+                    </tr>
+                  </tbody>
+
+                 
+                </table>
+              </div>
+            </div>
+        </div>
+        </div>
+  </div>
+ 
+</div>
+

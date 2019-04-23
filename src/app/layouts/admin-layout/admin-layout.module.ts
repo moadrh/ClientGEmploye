@@ -15,6 +15,7 @@ import { ServiceComponent } from '../../service/service.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
+import { EmployeComponent } from '../../employe/employe.component'; 
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { UpgradeComponent } from '../../upgrade/upgrade.component';
     MapsComponent,
     NotificationsComponent,
     ServiceComponent,
+    EmployeComponent
 
   ]
 })

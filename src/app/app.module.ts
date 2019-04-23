@@ -14,6 +14,7 @@ import { ServiceService } from './service/service.service';
 import { AppComponent } from './app.component';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { EmployeService } from './employe/employe.service';
 
 
 @NgModule({
@@ -31,11 +32,10 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
   ],
   declarations: [
     AppComponent,
-    AdminLayoutComponent,
-    
+    AdminLayoutComponent    
 
   ],
-  providers: [ServiceService],
+  providers: [ServiceService,EmployeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
