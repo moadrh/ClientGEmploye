@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { EmployeService } from './employe.service';
 import { Service } from '../shared/Service'
 import { Employe } from '../shared/Employe';
+import { ServiceService } from '../service/service.service';
 
 @Component({
   selector: 'app-employe',
@@ -12,17 +13,19 @@ import { Employe } from '../shared/Employe';
 export class EmployeComponent implements OnInit {
 
       employes : Employe[];
+      services : Service[];
       employeForm: FormGroup;
       operation: string = 'add';
       selectedEmploye :Employe ;
-
-      constructor(private employeService : EmployeService, private fb: FormBuilder){
+      
+     constructor(private employeService : EmployeService,private serviceService :ServiceService, private fb: FormBuilder){
          this.createForm();
       }
 
   ngOnInit() {
     this.initEmploye();
     this.loadEmployes();
+    this.loadServices();
   }
 
   createForm(){
@@ -39,7 +42,17 @@ export class EmployeComponent implements OnInit {
     this.employeService.getEmployes().subscribe(
       data => {this.employes = data},
       error => {console.log('erreurrrrrrrr !')},
-      () => {console.log('Le chargement des employes est terminé' )}
+      () => {console.log('Le chargement des employes est terminé ' +this.employes[0].nom)}
+      
+    );
+   
+  }
+
+  loadServices(){
+    this.serviceService.getServices().subscribe(
+      data => {this.services = data},
+      error => {console.log('erreurrrrrrrr !')},
+      () => {console.log('Le chargement des services est terminé'+this.services[0].nom)}
     );
   }
 
