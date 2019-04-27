@@ -5,7 +5,7 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          <h5 class="title">Service</h5>
+          <h5 class="title">Employés</h5>
           
         </div>
         <div class="card-body all-icons">
@@ -33,7 +33,7 @@
                       <label  class="col-sm-2 col-form-label">Sexe</label>
                       <div class="col-sm-8">
                         <select  class="form-control" formControlName="sexe" [(ngModel)]="selectedEmploye.sexe" >
-                          <option ></option>
+                          <option disabled="disabled">Sélectionnez un sexe</option>
                           <option value="Homme">Homme</option>
                           <option value="Femme">Femme</option>                          
                         </select>
@@ -42,9 +42,9 @@
                   <div class="form-group row">
                       <label  class="col-sm-2 col-form-label">Service</label>
                       <div class="col-sm-8">
-                        <select  class="form-control" formControlName="service" [(ngModel)]="selectedEmploye.service" >
-                          <option ></option>
-                          <option *ngFor="let service of services" value="service.id">{{service.nom}}</option>
+                        <select  class="form-control" formControlName="service" (change)="findServiceById(selectedEmploye.service)" [(ngModel)]="selectedEmploye.service" >
+                          <option disabled="disabled">Sélectionnez un service</option>
+                          <option *ngFor="let service of services"  [value]="service.id">{{service.nom}}</option>
                         </select>
                       </div>
                     </div> 
@@ -102,7 +102,7 @@
                       <td>{{employe.dateNaissance  | date: 'dd/MM/yyyy'}}</td>
                       <td>{{employe.sexe}}</td>
                      <td> {{employe.service.nom}}</td>
-                      <td><button class="btn btn-outline-warning"  (click)="selectedEmploye=employe ;operation='edit';">Modifier</button></td>
+                      <td><button class="btn btn-outline-warning"  (click)="selectedEmploye=employe;selectedEmploye.service=employe.service.id ;operation='edit';">Modifier</button></td>
                       <td><button class="btn btn-outline-danger" (click)="selectedEmploye=employe ; deleteEmploye()" >Supprimer</button></td>
                     </tr>
                   </tbody>

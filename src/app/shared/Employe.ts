@@ -6,7 +6,7 @@ export class Employe {
                  public prenom?:string,
                  public dateNaissance?:any,
                  public sexe?:string,
-                public service?:Service
+                public service?:any
                 )
     {
 

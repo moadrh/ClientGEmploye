@@ -14,6 +14,8 @@ export class EmployeComponent implements OnInit {
 
       employes : Employe[];
       services : Service[];
+      service : Service;
+      service2 : Service;
       employeForm: FormGroup;
       operation: string = 'add';
       selectedEmploye :Employe ;
@@ -26,6 +28,7 @@ export class EmployeComponent implements OnInit {
     this.initEmploye();
     this.loadEmployes();
     this.loadServices();
+    
   }
 
   createForm(){
@@ -55,19 +58,38 @@ export class EmployeComponent implements OnInit {
       () => {console.log('Le chargement des services est terminé'+this.services[0].nom)}
     );
   }
+ 
+
+   findServiceById(id:any):any{
+    console.log('service  '+this.selectedEmploye.service)
+     this.serviceService.getServiceById(id).subscribe(
+      data => {this.service = data},
+      error => {console.log('erreurrrrrrrr !')},
+      () => {console.log('Le chargement des services est terminé'+this.service.nom)}
+    );
+    return this.service;
+  }
 
   addEmploye(){
+    console.log('service  '+this.selectedEmploye.service)
     const s = this.employeForm.value;
-    this.employeService.addEmploye(s).subscribe(
+    console.log('find by ' + this.findServiceById(this.selectedEmploye.service));
+    if(this.findServiceById(this.selectedEmploye.service)!=null){
+      s.service = this.findServiceById(this.selectedEmploye.service);
+    }    
+    this.employeService.addEmploye(s).subscribe(    
       res => {
         this.initEmploye();
         this.loadEmployes();
       }
+     
     );
   }
 
   updateEmploye(){
-    
+    if(this.findServiceById(this.selectedEmploye.service)!=null){
+      this.selectedEmploye.service = this.findServiceById(this.selectedEmploye.service);
+    }  
     this.employeService.updateEmploye(this.selectedEmploye).subscribe(
       res => {
         this.initEmploye();

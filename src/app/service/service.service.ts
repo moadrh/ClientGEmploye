@@ -19,6 +19,10 @@ export class ServiceService {
       return this.http.post(API_URLS.SERVICE_URL, service);
   }
 
+  getServiceById(id:number): Observable<any>{
+    return this.http.get(API_URLS.SERVICE_URL+`/find/${id}`);
+}
+
   updateService(service:Service): Observable<any>{
       return this.http.put(API_URLS.SERVICE_URL, service);
   }
